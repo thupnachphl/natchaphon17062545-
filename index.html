@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เฟรนช์ฟรายส์ชายกบ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fffef5;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: rgb(202, 221, 61);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .slogan {
+      font-style: italic;
+      font-size: 14px;
+      color: #555;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+    .menu, .cart, .contact {
+      margin-top: 20px;
+    }
+    .item {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #fef9e7;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    .cart-item {
+      margin-bottom: 5px;
+    }
+    input[type="text"], select {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 6px 12px;
+      border: none;
+      background-color: #ffcc00;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    button:hover {
+      background-color: #ffdb4d;
+    }
+    #receipt {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>เฟรนช์ฟรายส์ชายกบ</h1>
+  <div class="slogan">"หยุดก็บ่อย เปิดก็สาย แต่ก็อร่อยเหมือนเดิม"</div>
+
+  <div>
+    <label>ชื่อ: <input type="text" id="name"></label>
+    <label>เบอร์โทร: <input type="text" id="phone"></label>
+    <label>ที่อยู่: <input type="text" id="address"></label>
+  </div>
+
+  <div class="menu">
+    <h2>เมนู</h2>
+
+    <div class="item">
+      เฟรนช์ฟรายส์ 20 บาท<br>
+      <select id="seasoning1">
+        <option value="">-- เลือกผง --</option>
+        <option value="ชีส">ชีส</option>
+        <option value="ปาปิก้า">ปาปิก้า</option>
+        <option value="บาบิคิว">บาบิคิว</option>
+        <option value="วิงซ์แซ่บ">วิงซ์แซ่บ</option>
+      </select>
+      <label><input type="checkbox" id="cheese1"> เพิ่มชีสดิป (+5บาท)</label><br>
+      <label><input type="checkbox" id="ketchup1"> เพิ่มซอสมะเขือเทศ(ฟรี)</label><br>
+      <button onclick="addToCart('เฟรนช์ฟรายส์ 20 บาท', 20, 'seasoning1', 'cheese1', 'ketchup1')">เพิ่มลงตะกร้า</button>
+    </div>
+
+    <div class="item">
+      เฟรนช์ฟรายส์ 30 บาท<br>
+      <select id="seasoning2">
+        <option value="">-- เลือกผง --</option>
+        <option value="ชีส">ชีส</option>
+        <option value="ปาปิก้า">ปาปิก้า</option>
+        <option value="บาบิคิว">บาบิคิว</option>
+        <option value="วิงซ์แซ่บ">วิงซ์แซ่บ</option>
+      </select>
+      <label><input type="checkbox" id="cheese2"> เพิ่มชีสดิป (+5บาท)</label><br>
+      <label><input type="checkbox" id="ketchup2"> เพิ่มซอสมะเขือเทศ(ฟรี)</label><br>
+      <button onclick="addToCart('เฟรนช์ฟรายส์ 30 บาท', 30, 'seasoning2', 'cheese2', 'ketchup2')">เพิ่มลงตะกร้า</button>
+    </div>
+
+    <div class="item">
+      ชีสบอล ลูกละ 5 บาท<br>
+      <select id="seasoning3">
+        <option value="">-- เลือกผง --</option>
+        <option value="ชีส">ชีส</option>
+        <option value="ปาปิก้า">ปาปิก้า</option>
+        <option value="บาบิคิว">บาบิคิว</option>
+        <option value="วิงซ์แซ่บ">วิงซ์แซ่บ</option>
+      </select>
+      <label><input type="checkbox" id="cheese3"> เพิ่มชีสดิป (+5บาท)</label><br>
+      <label><input type="checkbox" id="ketchup3"> เพิ่มซอสมะเขือเทศ(ฟรี)</label><br>
+      <button onclick="addToCart('ชีสบอล ลูกละ 5 บาท', 5, 'seasoning3', 'cheese3', 'ketchup3')">เพิ่มลงตะกร้า</button>
+    </div>
+
+    <div class="item">
+      ไก่ป๊อบ 3 ชิ้น 20 บาท<br>
+      <select id="seasoning4">
+        <option value="">-- เลือกผง --</option>
+        <option value="ชีส">ชีส</option>
+        <option value="ปาปิก้า">ปาปิก้า</option>
+        <option value="บาบิคิว">บาบิคิว</option>
+        <option value="วิงซ์แซ่บ">วิงซ์แซ่บ</option>
+      </select>
+      <label><input type="checkbox" id="cheese4"> เพิ่มชีสดิป (+5บาท)</label><br>
+      <label><input type="checkbox" id="ketchup4"> เพิ่มซอสมะเขือเทศ(ฟรี)</label><br>
+      <button onclick="addToCart('ไก่ป๊อบ 3 ชิ้น 20 บาท', 20, 'seasoning4', 'cheese4', 'ketchup4')">เพิ่มลงตะกร้า</button>
+    </div>
+  </div>
+
+  <div class="cart">
+    <h2>ตะกร้าสินค้า</h2>
+    <div id="cartItems"></div>
+    <strong>ราคารวม: <span id="total">0</span> บาท</strong><br><br>
+    <button onclick="showReceipt()">ดูใบเสร็จ</button>
+  </div>
+
+  <div id="receipt"></div>
+
+  <div class="contact">
+    <h3>ข้อมูลร้าน</h3>
+    <p>
+      ที่อยู่: ตลาดบางระกำ อำเภอบางระกำ จังหวัดพิษณุโลก<br>
+      ติดต่อไลน์: <a href="https://line.me/ti/p/~lokhot" target="_blank">@lokhot</a><br>
+      เบอร์โทร: 096-015-7245<br>
+      เฟซบุ๊ก: <a href="https://web.facebook.com/profile.php?id=61574576637333" target="_blank">เฟรนช์ฟรายส์ชายกบ</a>
+    </p>
+    <h4>ช่องทางการชำระเงิน</h4>
+    <p>
+      ธนาคารกรุงไทย<br>
+      เลขบัญชี: 6240496006<br>
+      ชื่อบัญชี: นายณัชพล ธูปหอม
+    </p>
+  </div>
+
+  <script>
+    const cart = [];
+
+    function addToCart(name, basePrice, seasoningId = null, cheeseId = null, ketchupId = null) {
+      let seasoning = "";
+      let cheese = false;
+      let ketchup = false;
+
+      if (seasoningId) {
+        seasoning = document.getElementById(seasoningId).value;
+      }
+      if (cheeseId) {
+        cheese = document.getElementById(cheeseId).checked;
+      }
+      if (ketchupId) {
+        ketchup = document.getElementById(ketchupId).checked;
+      }
+
+      let finalName = name;
+      if (seasoning) finalName += ` (${seasoning})`;
+      if (cheese) finalName += ' +ชีสดิป';
+      if (ketchup) finalName += ' +ซอสมะเขือเทศ';
+
+      let price = basePrice;
+      if (cheese) price += 5;
+
+      const index = cart.findIndex(item => item.name === finalName);
+      if (index > -1) {
+        cart[index].qty++;
+      } else {
+        cart.push({ name: finalName, price, qty: 1 });
+      }
+      renderCart();
+    }
+
+    function removeFromCart(name) {
+      const index = cart.findIndex(item => item.name === name);
+      if (index > -1) {
+        cart[index].qty--;
+        if (cart[index].qty <= 0) {
+          cart.splice(index, 1);
+        }
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cartItems");
+      const total = document.getElementById("total");
+      cartItems.innerHTML = "";
+
+      let sum = 0;
+      cart.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `${item.name} x ${item.qty} - ${item.price * item.qty} บาท`
+          + ` <button onclick="addToCart('${item.name}', ${item.price})">+</button>`
+          + ` <button onclick="removeFromCart('${item.name}')">-</button>`;
+        cartItems.appendChild(div);
+        sum += item.price * item.qty;
+      });
+      total.textContent = sum;
+    }
+
+    function generateReceipt() {
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+
+      if (!name || !phone || !address) {
+        return "กรุณากรอกชื่อ เบอร์โทร และที่อยู่ให้ครบถ้วนก่อนดูใบเสร็จ";
+      }
+
+      let text = `<h3>ใบเสร็จคำสั่งซื้อ</h3>`;
+      text += `<p>ชื่อ: ${name}<br>เบอร์โทร: ${phone}<br>ที่อยู่: ${address}</p>`;
+      text += `<ul>`;
+      let sum = 0;
+      cart.forEach(item => {
+        text += `<li>${item.name} x ${item.qty} - ${item.price * item.qty} บาท</li>`;
+        sum += item.price * item.qty;
+      });
+      text += `</ul>`;
+      text += `<strong>รวมทั้งหมด: ${sum} บาท</strong>`;
+
+      return text;
+    }
+
+    function showReceipt() {
+      const receipt = document.getElementById("receipt");
+      receipt.innerHTML = generateReceipt();
+      receipt.style.display = "block";
+    }
+  </script>
+</body>
+</html>
